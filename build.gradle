@@ -35,6 +35,7 @@ plugins {
     // https://docs.gradle.org/current/userguide/plugins.html#plugins_dsl_limitations
     id "io.gitlab.arturbosch.detekt" version "1.0.0.RC6-3"
     id "org.jetbrains.kotlin.kapt" version "1.2.50"
+    id "com.gradle.build-scan" version "3.6.1"
 }
 
 detekt {
@@ -76,4 +77,12 @@ task ktlint(type: JavaExec, group: "verification") {
     classpath = configurations.ktlint
     main = "com.github.shyiko.ktlint.Main"
     args "**/*.kt"
+}
+
+gradleEnterprise {
+    buildScan {
+        termsOfServiceUrl = "https://gradle.com/terms-of-service"
+        termsOfServiceAgree = "yes"
+        publishAlways()
+    }
 }
